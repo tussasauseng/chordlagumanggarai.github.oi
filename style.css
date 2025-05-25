@@ -1,0 +1,302 @@
+/* Reset dasar */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body */
+body {
+  font-family: sans-serif;
+  line-height: 1.6;
+  background-color: #f4f4f4;
+  color: #333;
+  padding: 16px;
+  max-width: 800px;
+  margin: auto;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Header */
+header {
+  text-align: center;
+  margin-bottom: 14px;
+  position: static;
+}
+
+header h1 {
+  font-size: 24px;
+  color: inherit;
+  
+  border-radius: 4px;
+  animation: glowingbutton 3s infinite ease-in-out;
+  transition: transform 0.1s ease;
+}
+
+/* Tombol toggle dark mode */
+.toggle-dark {
+  display: inline-block;
+  margin-top: 8px;
+  cursor: pointer;
+  font-size: 12px;
+  color: #007BFF;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #f0f0f0;
+}
+
+.toggle-dark:hover {
+  background: #ddd;
+}
+
+body.dark-mode .toggle-dark {
+  background: #333;
+  color: #fff;
+  border-color: #555;
+}
+
+/* Search box */
+.search-box {
+  margin-top: 10px;
+}
+
+.search-box input {
+  padding: 8px;
+  width: 50%;
+  max-width: 100px;
+  font-size: 10px;
+  border: 2px solid #ffd700;
+  border-radius: 4px;
+  animation: glowingbutton 6s infinite ease-in-out;
+  transition: transform 0.3s ease;
+}
+
+/* Tombol */
+button {
+  padding: 6px 12px;
+  margin: 4px;
+  font-size: 6px;
+  cursor: pointer;
+  background-color: #ffff;
+  color: white;
+  border: 2px solid #ffd700;
+  border-radius: 4px;
+  animation: glowingbutton 10s infinite ease-in-out;
+  transition: transform 0.3s ease;
+}
+
+
+
+
+
+
+button:hover {
+  background-color: #1976d2;
+  border-radius: 3px;
+}
+
+/* Area chord dan lirik */
+#chordArea {
+  white-space: pre-wrap;
+  font-family: "Courier New", monospace;
+  font-size: 14px;
+  line-height: 1.4;
+  font-weight: 500;
+  background-color: #eee;
+  color: black;
+  padding: 16px;
+  border: 2px solid #ffd700;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 24px auto; /* Ini membuatnya berada di tengah */
+  max-width: 100%; /* Supaya tidak melebihi layar */
+  box-shadow: 0 0 10px rgba(1, 0, 0, 0.1);
+}
+
+/* Dark mode styling */
+body.dark-mode {
+  background-color: #121212;
+  color: #ffffff;
+}
+
+header.dark-mode {
+  background-color: #1a1a1a;
+  color: #ffffff;
+}
+
+#chordArea.dark-mode {
+  background-color: #1e1e1e;
+  color: #e0e7e0;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  body {
+    padding: 8px;
+  }
+
+  button {
+    font-size: 8px;
+    padding: 5px 10px;
+  }
+
+  #chordArea {
+    font-size: 13px;
+    padding: 8px;
+  }
+}
+
+.chord {
+  color: #00ff00;
+  font-weight: bold;
+}
+
+#chordArea {
+  color: black;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.search-box {
+  display: flex;
+  justify-content: center;
+  margin-top: 12px;
+}
+
+.search-box input {
+  padding: 10px;
+  font-size: 14px;
+  width: 70%;
+  max-width: 400px;
+  border: 2px solid #ccc;
+  border-radius: 6px 0 0 6px;
+  outline: none;
+}
+
+.search-btn {
+  padding: 8px 14px;
+  background-color: #2196f3;
+  color: white;
+  border: none;
+  border-radius: 0 6px 6px 0;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.search-btn:hover {
+  background-color: #1976d2;
+}
+
+.ong-item {
+  padding: 10px;
+  margin: 6px 0;
+  background-color: #fff;
+  border-radius: 6px;
+  box-shadow: 0 0 6px rgba(0,0,0,0.1);
+}
+
+body.dark-mode .song-item {
+  background-color: #1e1e1e;
+  color: #e0e0e0;
+}
+
+.song-list {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* jarak antar lagu */
+}
+
+.song-item {
+  display: block;
+  padding: 10px;
+  background-color: #e0e0e0;
+  text-decoration: none;
+  color: #3a3;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+
+.song-item:hover {
+  background-color: #00ffaa;
+}
+
+.song-item {
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+  cursor: pointer;
+}
+.song-item:hover {
+  background-color: #2196f3;
+}
+
+
+
+@keyframes glowingbutton {
+  0%   { border-color: #ffd700; color: #1e90ff; }
+  33%  { border-color: #1e90ff; color: #ffd700; }
+  66%  { border-color: #ff69b4; color: #00ffaa; }
+  100% { border-color: #00ffaa; color: #ff69b4; }
+}
+
+h2 {
+  
+  border-radius: 4px;
+  border: 12px;
+  margin: 20px;
+  animation: glowingbutton 10s infinite ease-in-out;
+  transition: transform 0.6s ease;
+}
+
+header {
+  position: static; /* atau hapus jika sebelumnya ada fixed/sticky */
+}
+
+.nav-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.nav-buttons button {
+  padding: 6px 12px;
+  font-size: 8px;
+  background-color: #2196f3;
+  color: white;
+  border: 2px solid #ccc;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.nav-buttons button:hover {
+  background-color: #1976d2;
+  transform: scale(1.05);
+}
+
+/* DARK MODE */
+body.dark-mode .nav-buttons button {
+  background-color: #333;
+  border-color: #555;
+  color: #fff;
+}
+
+body.dark-mode .nav-buttons button:hover {
+  background-color: #555;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 16px;
+}
