@@ -1,27 +1,27 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Request Lagu / Komentar</title>
-  <link rel="stylesheet" href="style.css">
+   <link rel="stylesheet" href="style.css">
   <style>
     body {
-      font-family: sans-serif;
-      background: #f9f9f9;
+      font-family: Arial, sans-serif;
+      background: #f1f1f1;
+      margin: 0 auto;
       padding: 30px;
-      max-width: 700px;
-      margin: auto;
+      max-width: 800px;
     }
-    h2 {
+    h1, h2 {
       text-align: center;
-      color: #333;
+      color: #444;
     }
     form, .komentar {
-      background: white;
+      background: #fff;
       padding: 20px;
       margin-top: 20px;
       border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
     label {
       display: block;
@@ -36,20 +36,20 @@
       border: 1px solid #ccc;
     }
     button {
-      background: #ff5f6d;
-      color: white;
-      border: none;
+      background-color: #ff5f6d;
+      color: #fff;
       padding: 12px 20px;
-      border-radius: 30px;
-      cursor: pointer;
+      border: none;
+      border-radius: 25px;
       font-size: 16px;
+      cursor: pointer;
     }
     .entry {
       border-bottom: 1px solid #ddd;
       padding: 10px 0;
     }
     .entry:last-child {
-      border: none;
+      border-bottom: none;
     }
     .entry strong {
       color: #ff5f6d;
@@ -57,86 +57,83 @@
   </style>
 </head>
 <body>
-  <header>
-    <h1>ChordGitar.ID</h1>
-    <span class="toggle-dark" onclick="toggleDark()">Dark Mode</span>
-    <div class="search-box">
-  <input type="text" id="searchInput" placeholder="Cari judul lagu atau nama artis..." />
-  <button class="search-btn">Cari</button>
-</div>
 
-  </header>
+  <h1>ChordGitar.ID</h1>
+  <h2>Request Lagu / Kirim Komentar</h2>
+  
   <div class="nav-buttons">
   <button onclick="location.href='index.html'">Home</button>
   <button onclick="location.href='daftar-isi.html'">Daftar Isi</button>
   <button onclick="location.href='komentar.html'">Request Chord</button>
 </div>
-  
-  
-  <h2>Form Komentar / Request Lagu</h2>
+
   <form id="requestForm">
     <label for="name">Nama:</label>
-    <input type="text" id="name" required>
+    <input type="text" id="name" name="nama" required />
 
-    <label for="lagu">Judul Lagu yang Direquest:</label>
-    <input type="text" id="lagu" required>
+    <label for="lagu">Judul Lagu:</label>
+    <input type="text" id="lagu" name="lagu" required />
 
-    <label for="pesan">Komentar atau Pesan:</label>
-    <textarea id="pesan" rows="4"></textarea>
+    <label for="pesan">Pesan:</label>
+    <textarea id="pesan" name="pesan" rows="4"></textarea>
 
     <button type="submit">Kirim</button>
   </form>
 
-  <div class="komentar" id="komentarContainer">
+  <div class="komentar">
     <h3>Semua Komentar & Request Lagu:</h3>
-    <div id="komentarList">Memuat...</div>
+    <div id="komentarList">Memuat data...</div>
   </div>
 
   <script>
-    const scriptURL = "https://script.google.com/macros/library/d/1a4hlWXvvzd7Qn0rh3pXNzgBM5TfWQWv8NT33EFvn69C61L-Rr8N39JnQ/2";
+    const scriptURL = "https://script.google.com/macros/s/AKfycbwpHVujHCk8MILfyZobYGbBstCmSYzzRhCU0S8Cseqnh11uf9QznfzuxT3McGVvw7R6DA/exec";
 
-    // Kirim Form
+    // Kirim data ke Google Sheet
     document.getElementById("requestForm").addEventListener("submit", function(e) {
       e.preventDefault();
       const nama = document.getElementById("name").value;
       const lagu = document.getElementById("lagu").value;
       const pesan = document.getElementById("pesan").value;
 
+      const formData = new FormData();
+      formData.append("nama", nama);
+      formData.append("lagu", lagu);
+      formData.append("pesan", pesan);
+
       fetch(scriptURL, {
         method: "POST",
-        body: JSON.stringify({ nama, lagu, pesan }),
-        headers: {
-          "Content-Type": "application/json"
-        }
+        body: formData
       })
       .then(() => {
-        alert("Berhasil dikirim!");
+        alert("Komentar berhasil dikirim!");
         document.getElementById("requestForm").reset();
-        loadKomentar(); // Refresh komentar
+        loadKomentar();
       })
-      .catch(err => alert("Gagal mengirim: " + err));
+      .catch(error => alert("Gagal mengirim komentar: " + error));
     });
 
-    // Load Komentar
+    // Ambil komentar dari Google Sheet (harus didukung oleh Apps Script doGet)
     function loadKomentar() {
       fetch(scriptURL)
-        .then(res => res.json())
+        .then(response => response.json())
         .then(data => {
-          const list = document.getElementById("komentarList");
-          list.innerHTML = "";
-          data.reverse().forEach(entry => {
+          const komentarList = document.getElementById("komentarList");
+          komentarList.innerHTML = "";
+          data.reverse().forEach(item => {
             const div = document.createElement("div");
             div.className = "entry";
-            div.innerHTML = `<strong>${entry.nama}</strong> (${entry.lagu})<br><em>${entry.pesan}</em>`;
-            list.appendChild(div);
+            div.innerHTML = `<strong>${item.nama}</strong> (${item.lagu})<br><em>${item.pesan}</em>`;
+            komentarList.appendChild(div);
           });
+        })
+        .catch(error => {
+          document.getElementById("komentarList").innerText = "Gagal memuat komentar.";
         });
     }
 
     loadKomentar();
   </script>
-  
   <script src="script.js"></script>
-  
+
 </body>
 </html>
