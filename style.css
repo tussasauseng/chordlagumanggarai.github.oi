@@ -100,9 +100,9 @@ button:hover {
 #chordArea {
   white-space: pre-wrap;
   font-family: "Courier New", monospace;
-  font-size: 14px;
-  line-height: 1.4;
-  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.1;
+  font-weight: 400;
   background-color: #eee;
   color: black;
   padding: 16px;
@@ -112,6 +112,9 @@ button:hover {
   margin: 24px auto; /* Ini membuatnya berada di tengah */
   max-width: 100%; /* Supaya tidak melebihi layar */
   box-shadow: 0 0 10px rgba(1, 0, 0, 0.1);
+  white-space: pre;
+ overflow-x: auto;
+ overflow-y: hidden;
 }
 
 /* Dark mode styling */
