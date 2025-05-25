@@ -98,23 +98,21 @@ button:hover {
 
 /* Area chord dan lirik */
 #chordArea {
-  white-space: pre-wrap;
-  font-family: "Courier New", monospace;
-  font-size: 12px;
-  line-height: 1.1;
+  white-space: pre; /* Jaga baris tetap satu, tidak wrap */
+  font-family: "Courier New", monospace; /* Font sejajar */
+  font-size: 14px;
+  line-height: 1.5;
   font-weight: 400;
-  background-color: #eee;
+  background-color: #f7f7f7;
   color: black;
   padding: 16px;
   border: 2px solid #ffd700;
   border-radius: 8px;
-  overflow-x: auto;
-  margin: 24px auto; /* Ini membuatnya berada di tengah */
-  max-width: 100%; /* Supaya tidak melebihi layar */
+  overflow-x: auto; /* Scroll horizontal */
+  overflow-y: hidden;
+  margin: 24px auto;
+  max-width: 100%;
   box-shadow: 0 0 10px rgba(1, 0, 0, 0.1);
-  white-space: pre;
- overflow-x: auto;
- overflow-y: hidden;
 }
 
 /* Dark mode styling */
